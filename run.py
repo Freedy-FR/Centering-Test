@@ -84,12 +84,13 @@ class Board:
 class Game:
     """ Main class to manage the game logic."""
     def __init__(self):
+        clear()
         self.player_name = ""
         self.size = 0
         self.player_board = None
         self.computer_hid_board = None
         self.computer_g_board = None
-        self.turns_left = 2
+        self.turns_left = 10
 
     def restart_game(self):
         """Reset the main game."""
@@ -100,6 +101,7 @@ class Game:
             )
             )
         sleep(5)
+        clear()
         self.__init__()
         self.input_name()
         self.table_size()
@@ -265,7 +267,6 @@ class Game:
         while self.turns_left > 0:
             # Display enemy and player boards
             self.computer_g_board.print_to_console()
-            self.computer_hid_board.print_to_console()
             self.player_board.print_to_console()
 
             # Display turns left
