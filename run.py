@@ -416,6 +416,7 @@ class Game:
                     )
                 sleep(3)
                 clear()
+                clear()
                 if self.turns_left == 0:
                     clear()
                     self.computer_g_board.print_to_console()
