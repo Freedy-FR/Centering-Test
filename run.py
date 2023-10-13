@@ -47,22 +47,18 @@ class Board:
         self.title = title
         self.board = [[" "] * size for _ in range(size)]
 
-    def print_to_console(self):
+    def print_to_console(self, first_turn=False):
         """Print the game board to the console."""
-        if self.title:
+        if first_turn:
             # Create an username title to the board and center username
             print("---{:^10}--- ".format(self.title))
-        else:
-            print()
-
-        # Create the heading and separator based on the size given
-        heading = [" "] + [str(i) for i in range(self.size)]
-        separator = ["+"] * self.size
-
-        # Print the heading and separator
-        print(" " + " ".join(heading))
-        print("   " + " ".join(separator))
-
+            # Create the heading and separator based on the size given
+            heading = [" "] + [str(i) for i in range(self.size)]
+            separator = ["+"] * self.size
+            # Print the heading and separator
+            print(" " + " ".join(heading))
+            print("   " + " ".join(separator))
+        
         # Create and enumerate the boards
         for i, row in enumerate(self.board):
             print("-{}|{}|".format(i, "|".join(row)))
@@ -268,8 +264,8 @@ class Game:
         """Run the main game loop."""
         while self.turns_left > 0:
             # Display enemy and player boards
-            self.computer_g_board.print_to_console()
-            self.player_board.print_to_console()
+            self.player_board.print_to_console(first_turn=True)  # First turn
+            self.computer_g_board.print_to_console(first_turn=True)  # First turn
 
             # Display turns left
             print(TextCentering().center_text(
