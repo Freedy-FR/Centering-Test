@@ -35,27 +35,17 @@ class Images:
 
 
 class Board:
-    """Class that creates boards and airships.
+    """Class that creates boards and airships."""
 
-    Attributes:
-        size (int): The size of the board.
-        title (str): The title of the board (added dynamically in __init__).
-        board (List[List[str]]): The game board represented as a list of lists.
-    """
     def __init__(self, size, title):
         self.size = size
         self.title = title
+        self.heading = [" "] + [str(i) for i in range(self.size)]  # Moved here
+        self.separator = ["+"] * self.size  # Moved here
         self.board = [[" "] * size for _ in range(size)]
-        self.heading = None
-        self.separator = None  # Initialize heading and separator as None
 
     def print_to_console(self):
         """Print the game board to the console, including heading and separator."""
-        # Create the heading and separator if they are None
-        if self.heading is None or self.separator is None:
-            self.heading = [" "] + [str(i) for i in range(self.size)]
-            self.separator = ["+"] * self.size
-
         # Print the heading and separator
         print("---{:^10}--- ".format(self.title))
         print(" " + " ".join(self.heading))
@@ -108,8 +98,6 @@ class Game:
         self.player_board = Board(self.size, self.player_name)
         self.computer_hid_board = Board(self.size, "Enemy Hidden")
         self.computer_g_board = Board(self.size, "Enemy")
-        Board.create_airships(self.computer_hid_board)
-        Board.create_airships(self.player_board)
         self.run_game()
 
     def input_name(self):
@@ -218,9 +206,9 @@ class Game:
 
     def get_user_atk_input(self):
         """Validate user input."""
+        clear()
         while True:  # Create an infinite loop
             try:
-                clear()
                 self.computer_g_board.print_to_console()
                 self.player_board.print_to_console()
                 print(TextCentering().center_text(
