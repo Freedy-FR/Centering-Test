@@ -89,7 +89,7 @@ class Game:
         self.player_board = None
         self.computer_hid_board = None
         self.computer_g_board = None
-        self.turns_left = 10
+        self.turns_left = 2
 
     def restart_game(self):
         """Reset the main game."""
@@ -265,6 +265,7 @@ class Game:
         while self.turns_left > 0:
             # Display enemy and player boards
             self.computer_g_board.print_to_console()
+            self.computer_hid_board.print_to_console()
             self.player_board.print_to_console()
 
             # Display turns left
