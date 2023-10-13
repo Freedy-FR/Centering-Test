@@ -416,11 +416,8 @@ class Game:
                     )
                 sleep(3)
                 clear()
-                clear()
                 if self.turns_left == 0:
                     clear()
-                    self.computer_g_board.print_to_console()
-                    self.player_board.print_to_console()
                     Images.airship()
                     print(TextCentering().center_text(
                         "You lose!!"
