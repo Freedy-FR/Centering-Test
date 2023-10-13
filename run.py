@@ -35,23 +35,32 @@ class Images:
 
 
 class Board:
-    """Class that creates boards and airships."""
+    """Class that creates boards and airships.
 
+    Attributes:
+        size (int): The size of the board.
+        title (str): The title of the board (added dynamically in __init__).
+        board (List[List[str]]): The game board represented as a list of lists.
+    """
     def __init__(self, size, title):
         self.size = size
         self.title = title
-        self.heading = [" "] + [str(i) for i in range(self.size)]  # Moved here
-        self.separator = ["+"] * self.size  # Moved here
         self.board = [[" "] * size for _ in range(size)]
 
     def print_to_console(self):
-        """Print the game board to the console, including heading and separator."""
-        # Print the heading and separator
+        """Print the game board to the console."""
+        # Create an username title to the board and center username
         print("---{:^10}--- ".format(self.title))
-        print(" " + " ".join(self.heading))
-        print("   " + " ".join(self.separator))
 
-        # Create and enumerate the boards
+        # Create the heading and separator based on the size given
+        heading = [" "] + [str(i) for i in range(self.size)]
+        separator = ["+"] * self.size
+
+        # Print the heading and separator
+        print(" " + " ".join(heading))
+        print("   " + " ".join(separator))
+
+        # Create an enumerate the boards
         for i, row in enumerate(self.board):
             print("-{}|{}|".format(i, "|".join(row)))
         print()
@@ -98,6 +107,8 @@ class Game:
         self.player_board = Board(self.size, self.player_name)
         self.computer_hid_board = Board(self.size, "Enemy Hidden")
         self.computer_g_board = Board(self.size, "Enemy")
+        Board.create_airships(self.computer_hid_board)
+        Board.create_airships(self.player_board)
         self.run_game()
 
     def input_name(self):
@@ -206,9 +217,9 @@ class Game:
 
     def get_user_atk_input(self):
         """Validate user input."""
-        clear()
         while True:  # Create an infinite loop
             try:
+                clear()
                 self.computer_g_board.print_to_console()
                 self.player_board.print_to_console()
                 print(TextCentering().center_text(
