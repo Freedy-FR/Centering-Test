@@ -49,8 +49,11 @@ class Board:
 
     def print_to_console(self):
         """Print the game board to the console."""
-        # Create an username title to the board and center username
-        print("---{:^10}--- ".format(self.title))
+        if self.title:
+            # Create an username title to the board and center username
+            print("---{:^10}--- ".format(self.title))
+        else:
+            print()
 
         # Create the heading and separator based on the size given
         heading = [" "] + [str(i) for i in range(self.size)]
@@ -60,7 +63,7 @@ class Board:
         print(" " + " ".join(heading))
         print("   " + " ".join(separator))
 
-        # Create an enumerate the boards
+        # Create and enumerate the boards
         for i, row in enumerate(self.board):
             print("-{}|{}|".format(i, "|".join(row)))
         print()
@@ -84,13 +87,12 @@ class Board:
 class Game:
     """ Main class to manage the game logic."""
     def __init__(self):
-        clear()
         self.player_name = ""
         self.size = 0
         self.player_board = None
         self.computer_hid_board = None
         self.computer_g_board = None
-        self.turns_left = 10
+        self.turns_left = 2
 
     def restart_game(self):
         """Reset the main game."""
