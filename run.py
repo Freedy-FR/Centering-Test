@@ -89,7 +89,7 @@ class Game:
         self.player_board = None
         self.computer_hid_board = None
         self.computer_g_board = None
-        self.turns_left = 2
+        self.turns_left = 10
 
     def restart_game(self):
         """Reset the main game."""
@@ -383,7 +383,7 @@ class Game:
                 clear()
 
             # Check if computer wins
-            if self.player_sunk_ships(self.player_board) == (self.size - 1):
+            if self.player_sunk_ships(self.player_board) == (self.size - 3):
                 clear()
                 clear()
                 Images.airship()
@@ -439,7 +439,7 @@ class Game:
     @staticmethod
     def player_sunk_ships(board):
         """Count the number if player sunken ships"""
-        sunk_ships = sum(row.count("0") for row in board.board)
+        sunk_ships = sum(row.count("O") for row in board.board)
         return sunk_ships
 
 
